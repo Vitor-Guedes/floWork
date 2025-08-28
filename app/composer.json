@@ -1,0 +1,11 @@
+{
+    "name": "flowork/app",
+    "description": "Projeto para definir fluxos de trabalho.",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "FloWork\\": "src/"
+        }
+    },
+    "version": "1.0.0"
+}

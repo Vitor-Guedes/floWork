@@ -1,0 +1,26 @@
+# Use the official PHP 8.3 FPM image
+FROM php:8.3-fpm
+
+# Install necessary dependencies for Xdebug
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libtool \
+    pkg-config \
+    re2c \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Configure Xdebug
+# Create a custom Xdebug INI file
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Expose the FPM port
+EXPOSE 9000
+
+WORKDIR /var/www
+
+# Set the entrypoint for FPM
+CMD ["php-fpm"]

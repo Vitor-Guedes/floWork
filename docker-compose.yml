@@ -1,0 +1,35 @@
+services:
+  nginx: 
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      - scraping
+    deploy:
+      resources:
+        limits:
+          cpus: "0.15"
+          memory: "48MB"
+
+  php:
+    build: .
+    volumes:
+      - ./app:/var/www
+    networks:
+      - scraping
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy: 
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "108MB"
+    
+networks:
+  scraping:
+    driver: bridge
