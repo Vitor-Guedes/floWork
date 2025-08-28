@@ -10,15 +10,21 @@ class Sequential extends AbstractType implements ContractWorkflow
     public function execute(): void
     {
         try {
-            foreach ($this->steps as $step) {
+            foreach ($this->steps as $key => $step) {
                 $next = $step();
+
+                $this->marker($key, $next);
 
                 if (! $next) {
                     break ;
                 }
             }
+
+            if ($this->onSuccess) {
+                $this->success();
+            }
         } catch (Exception $exception) {
-            $this->failure($exception);
+            $this->failure($exception, $this);
         }
     }
 }

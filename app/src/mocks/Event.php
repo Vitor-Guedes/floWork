@@ -2,7 +2,7 @@
 
 return [
     'step-age' => function () {
-        $age = rand(15, 25);
+        $age = rand(15, 17);
 
         echo "Idade: $age" . PHP_EOL;
 
@@ -13,7 +13,9 @@ return [
     'step-major-legal-age' => function () {
         echo "É maio de idade." . PHP_EOL;
 
-        throw new \Exception("Algo deu Errado. #Teste");
+        if (rand(0, 1)) {
+            throw new \Exception("Algo deu Errado. #Teste");
+        }
 
         return "send-email";
     },
@@ -25,16 +27,28 @@ return [
     'send-email' => function () {
         echo "Enviar EMAIL para a pessoa maior de idade." . PHP_EOL;
 
-        return false;
+        if (rand(0, 1)) {
+            throw new \Exception("Algo deu Errado. #Teste");
+        }
+
+        return "ok";
     },
     'send-sms' => function () {
         echo "Enviar SMS para a pessoa maior de idade." . PHP_EOL;
+
+        if (rand(0, 1)) {
+            throw new \Exception("Algo deu Errado. #Teste");
+        }
 
         return "make-call";
     },
     'make-call' => function () {
         echo "Ligar para o responsavel." . PHP_EOL;
 
-        return false;
+        if (rand(0, 1)) {
+            throw new \Exception("Algo deu Errado. #Teste");
+        }
+
+        return 'ok';
     },
 ];
