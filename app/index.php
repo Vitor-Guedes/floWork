@@ -30,6 +30,10 @@ $wotkflowTypes = [
     'pipeline' => [
         'file' => __DIR__ . "/src/mocks/Pipeline.php",
         'class' => \FloWork\Types\Pipeline::class
+    ],
+    'coroutine' => [
+        'file' => __DIR__ . "/src/mocks/Coroutine.php",
+        'class' => \FloWork\Types\Coroutine::class
     ]
 ];
 
